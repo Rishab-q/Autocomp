@@ -1,18 +1,33 @@
-# Autocomplete API words extraction
-Note: I have written the code for extraction from v1 version. I was unable to complete the assignment as there was a timeout error while accessing the API.
+# Autocomplete API – Word Extraction
 
-V1(only alphabets)
-CONSTRAINTS:
-->	The API only returns the first ten words for the respective query  
-->	The rate limit is 100 words per minute  
-ALGORITHM:
-->	Starting from query=’a’ , if the count was 10 , I checked the common partial string between results[0] and results[9] and compared it with partial common string between results[8] and result[9].
-->	If both are same , it means we have to check from the next query=common string+ the next letter in result[9] since the common string will return the same result as the initial query.
-->	If both are not same, we check for the next query=common string  between result[8 and result[9] because this query is lexicographically higher which may return words more than those present in the result of initial query.
--> Under the recursion , we run a loop from the argument ‘char’( the last character of the passed string) till the exhaustion of alphabets.
-->	This optimizes the search for the words such that we don’t have to check for every possible string and at the same time leaving no exceptions.
--> We add a query counter and a time counter to ensure that whenever the function reaches 100 calls, we wait till the rate limit refreshes to ensure proper implementation.
+### Note:
+I implemented the extraction logic for version 1 (`v1`), but I was unable to complete the assignment due to a timeout error while accessing the API.
 
-V2(numbers and alphabets): Probably the same logic with different loop range
-V3(numbers,special characters,alphabets): Probably the same logic with different loop range
+## Version 1 (Only Alphabets)
+
+### Constraints:
+- The API returns a maximum of **10 words** per query.
+- The rate limit is **100 words per minute**.
+
+### Algorithm:
+1. **Querying Strategy:**  
+   - We begin with `query = 'a'`. If the API returns exactly **10 words**, we analyze the common prefix between `results[0]` and `results[9]`, then compare it with the common prefix between `results[8]` and `results[9]`.  
+   - If both prefixes match, it indicates that querying with just the common prefix would yield the same results. Instead, the next query should be `common prefix + the next letter in results[9]`.  
+   - If the prefixes differ, we use `query = common prefix between results[8] and results[9]`, as this is lexicographically larger and may return additional words beyond those in the initial query.  
+
+2. **Recursive Expansion:**  
+   - A recursive loop iterates through characters, starting from the last character of the passed query string until all possible alphabetic combinations are exhausted.  
+   - This approach optimizes the search process by reducing redundant queries while ensuring complete word coverage.  
+
+3. **Rate Limiting:**  
+   - A query counter and a time tracker are implemented to prevent exceeding the **100 words per minute** limit.  
+   - If the function reaches **100 queries**, it pauses execution until the rate limit resets.  
+
+---
+
+## Version 2 (Alphabets + Numbers)
+The same logic applies, but the loop range is adjusted to include numerical characters.
+
+## Version 3 (Alphabets + Numbers + Special Characters)
+This version extends the loop range further to handle special characters in addition to alphabets and numbers.
 
