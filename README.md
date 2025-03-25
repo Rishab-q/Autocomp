@@ -1,1 +1,2 @@
-# Autocomp
+# Autocomplete API words extraction
+
