@@ -3,8 +3,8 @@ Note: I have written the code for extraction from v1 version. I was unable to co
 
 V1(only alphabets)
 CONSTRAINTS:
-->	The API only returns the first ten words for the respective query
-->	The rate limit is 100 words per minute
+->	The API only returns the first ten words for the respective query  
+->	The rate limit is 100 words per minute  
 ALGORITHM:
 ->	Starting from query=’a’ , if the count was 10 , I checked the common partial string between results[0] and results[9] and compared it with partial common string between results[8] and result[9].
 ->	If both are same , it means we have to check from the next query=common string+ the next letter in result[9] since the common string will return the same result as the initial query.
